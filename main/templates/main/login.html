@@ -1,0 +1,135 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+<!-- ================================
+Start SEO blocks
+================================= -->
+{% block title %}{% endblock %}
+{% block decription %}{% endblock %}
+{% block keywords %}{% endblock %}
+<!-- ================================
+END SEO blocks
+================================= -->
+
+<!-- ================================
+Start CSS blocks
+================================= -->
+{% block extend_header %}{% endblock %}
+<!-- ================================
+END CSS blocks
+================================= -->
+
+<!-- ================================
+Start script blocks
+================================= -->
+{% block extend_footer %}{% endblock %}
+<!-- ================================
+END script blocks
+================================= -->
+
+<!-- ================================
+Start Content
+================================= -->
+{% block content %}
+<style>
+    /*page specific extra-css*/  
+    .two-col {
+        flex-direction: column;  
+        display: flex;
+        
+    }
+    .logo-main {
+        text-align: center;  
+    }
+    .col {
+        width: 100%;
+        padding: 20px;
+        align-items: center;  
+    
+    }
+
+    @media (min-width: 800px) {
+        .two-col {
+            flex-direction: row;  
+            height: auto;
+            width: auto;
+        }
+                
+        .col {
+            width: 50%;
+        } 
+    }
+    
+    body, html {
+        background: url({% static 'images/CurvaCrema.png' %}) no-repeat fixed right center;"
+        background-size: 70% auto;
+    }
+    
+    @media (min-width: 800px) { 
+        body, html {
+            -webkit-background-size:70% auto;
+            -moz-background-size:70% auto;
+            -o-background-size:70% auto;
+            background-size:70% auto;
+        } 
+    }
+</style>
+    <div style="height:152px;">
+    </div>
+
+<div class="container">
+    <div class="two-col">
+                    <div class="col">
+                        <div>
+                            <div class="logo-main">
+                                <img src="{% static 'images/Logo2-black.png' %}" style="height:300px; width:200px;" alt="..."></a>
+                            </div>
+                        </div>
+                    </div>                
+                <div class="col">
+                    <div class="user_card">
+                        <div class="d-flex justify-content-center">
+                            <h3 id="form-title">Iniciar Sesión</h3>
+                        </div>
+                        <div class="d-flex justify-content-center form_container">
+                            <form method="POST" action="">
+                                {% csrf_token %}
+
+                                <div class="input-group mb-3">
+                                        <span class="input-group-text border-0" id="user-addon"><i class="fa fa-user-circle"></i></span> 
+                                    <input name="username" placeholder="Usuario..." class="form-control rounded" aria-label="User" aria-describedby="user-addon"/>
+                                </div>
+
+                                <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text border-0" style="height: 40px;" id="pass-addon"><i class="fa fa-key"></i></span>
+                                            </div> 
+                                    <input type="password" name="password" placeholder="Contraseña..." class="form-control" aria-label="Pass" aria-describedby="pass-addon">
+                                </div>
+            
+                                    <div class="d-flex justify-content-center mt-3 login_container">
+                                        <input class="btn btnPrimary" type="submit" value="Acceder">
+                                    </div>
+                            </form>
+            
+                        </div>
+                        <div class="d-flex justify-content-center links"> 
+                            {% for message in messages %}
+                            <p id="messages">{{message}}</p>
+                            {% endfor %}	
+                        </div> 
+                        <div class="mt-4">
+                            <div class="d-flex justify-content-center links">
+                                ¿No tienes contraseña? <a href="{% url 'main:register' %}" class="ml-2">  ¡Registrate ahora! </a>
+                            </div>
+                </div> 
+
+
+        </div>
+
+
+
+{% endblock %}
+<!-- ================================
+End Content
+================================= -->

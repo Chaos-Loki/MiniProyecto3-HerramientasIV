@@ -15,6 +15,7 @@ class UserProfile(models.Model):
         verbose_name = 'User Profile'
         
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    role = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):
         return f'{self.user.first_name} {self.user.last_name}'

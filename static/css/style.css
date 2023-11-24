@@ -1,19 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Heebo:wght@400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Beth+Ellen:wght@400;700&family=Lato:wght@400;500;700;900&family=Satisfy:wght@400;500;700;900&display=swap');
 /* font-family: 'Courier Prime', monospace;
 font-family: 'Heebo', sans-serif; */
 :root {
-  --primaryColor: #9C07B6;
-  --primaryDarkColor: #3D0048;
-  --primaryHoverColor: #900AA8;
-  --secondaryColor: #F9B000;
-  --baseColor: #21243D;
-  --baseFont: 'Heebo', sans-serif;
-  --titleFont: 'Courier Prime', monospace;
+  --primaryColor: #F4BF96;
+  --primaryDarkColor: #dba073;
+  --primaryHoverColor: #F4BF96;
+  --secondaryColor: #CE5A67;
+  --baseColor: #1F1717;
+  --baseFont: 'Lato', sans-serif;
+  --navFont: 'Satisfy', sans-serif;
+  --titleFont: 'Beth Ellen', monospace;
   --regular: 400;
   --medium: 500;
   --bold: 700;
   --black: 900;
-  --lightBg: #F1F1F1;
+  --lightBg: #FCF5ED;
 }
 html {
   scroll-behavior: smooth;
@@ -154,10 +155,11 @@ a, .btn {
 
 /* navigation */
 .navCol {
+  font-family: var(--navFont);
 	text-align: right;
 }
 .navCol a {
-	font-size: 20px;
+	font-size: 23px;
 	color: #000;
   font-weight: var(--medium);
   display: inline-block;

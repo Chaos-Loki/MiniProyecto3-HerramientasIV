@@ -3,35 +3,39 @@
 Start Navigation Bar
 ================================= -->
 <header>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css" integrity="sha256-XoaMnoYC5TH6/+ihMEnospgm0J1PM/nioxbOUdnM8HY=" crossorigin="anonymous">
     <div class="headerCol">
     <div class="container-fluid">
         <div class="row align-items-center">
         <div class="col-auto">
-            <div class="logoCol"><a href="{% url 'main:home' %}"><img src="{% static 'images/logo.png' %}" alt="..."></a></div>
+            <div class="logoCol"><a href="{% url 'main:home' %}"><img src="{% static 'images/LogoBanner.png' %}" style="height:70px; width:145px;" alt="..."></a></div>
         </div>
-        <div class="col">
-            <div class="d-md-none">
-            <button class="navToggle">
-                <span class="navToggle__text">Toggle Menu</span>
-            </button>
-            </div>
-            <div class="navCollapseCol">
-            <div class="navCol">
-                <ul>
-                {% comment %} <li><a href="{%url 'main:home'%}">Home</a></li>
-                <li><a href="{% url 'main:categories' %}">Categories</a></li>
-                {% if request.user.is_authenticated %}
-                <li><a href="{% url 'main:profiles' %}">Profile</a></li>
-                <li><a href="{% url 'main:logout' %}">Logout</a></li>
-                {% else %}
-                <li><a href="{% url 'main:register' %}">Register</a></li>
-                <li><a href="{% url 'main:login' %}">Login</a></li>
-                {% endif %}  {% endcomment %}
-                </ul>
-            </div>
+            <div class="col">
+                    <div class="d-md-none">
+                        <button class="navToggle">
+                            <span class="navToggle__text">Toggle Menu</span>
+                        </button>
+                    </div>
+                <div class="navCollapseCol">
+                    <div class="navCol">
+                        <ul>
+                        <li><a href="{%url 'main:home'%}">Inicio</a></li>
+                        {% comment %} <li><a href="{% url 'main:categories' %}">Categories</a></li> {% endcomment %}
+                        {% if request.user.is_authenticated %}
+                        {% comment %} <li><a href="{% url 'main:profiles' %}">Profile</a></li>{% endcomment %}
+                        <li><a href="{% url 'main:logout' %}">Cerrar Sesión</a></li>
+                        {% else %} 
+                        <li><a href="{% url 'main:register' %}">Registrarse</a></li>
+                        <li><a href="{% url 'main:login' %}">Iniciar Sesión</a></li>
+                        {% endif %} 
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-        </div>
+    <hr style="border: none;
+    height: 5px;
+    background: #d17c3b;" />
     </div>
     </div>
     
