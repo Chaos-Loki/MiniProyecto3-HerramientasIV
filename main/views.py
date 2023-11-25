@@ -19,7 +19,7 @@ from django.core.paginator import (
 from .models import (
         UserProfile,
     )
-from . forms import CreateUserForm
+from . forms import CreateUserForm, USER_ROLES
 
 #---VISTAS DE SESION DE USUARIO
 
@@ -36,9 +36,8 @@ def registerPage(request):
                 user = form.cleaned_data.get('username')
                 messages.success(request, 'Se creo la cuenta para ' + user)
                 return redirect('main:login')
-        context = {'form':form}
+        context = {'form':form, 'roles': USER_ROLES}
         return render(request, 'main/register.html', context)
-#Funcion de Login
 
 def loginPage(request):
     if request.user.is_authenticated:
