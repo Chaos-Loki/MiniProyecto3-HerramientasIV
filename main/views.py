@@ -22,7 +22,6 @@ from .models import (
         Category,
         Review,
     )
-from . forms import CreateUserForm, USER_ROLES
 from django.views.decorators.cache import cache_control
 
 #---VISTAS DE SESION DE USUARIO
@@ -38,12 +37,11 @@ def registerPage(request):
             if form.is_valid():
                 form.save()
                 user = form.cleaned_data.get('username')
-                role = form.cleaned_data.get('role', '')
-                UserProfile.objects.update_or_create(user=user, defaults={'role': role})
-                messages.success(request, 'Se creo la cuenta para ' + user)
+                messages.success(request, 'Account was created for ' + user)
                 return redirect('main:login')
-        context = {'form':form, 'roles': USER_ROLES}
+        context = {'form':form}
         return render(request, 'main/register.html', context)
+#Funcion de Login
 
 def loginPage(request):
     if request.user.is_authenticated:
