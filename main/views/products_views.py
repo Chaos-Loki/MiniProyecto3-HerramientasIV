@@ -40,21 +40,14 @@ def ProductCreatePage(request):
             form = ProductPostForm()
     else:
         form = ProductPostForm()
-    return render(request, "main/add-products.html", {'form':form})
+    return render(request, "main/Products/add-products.html", {'form':form})
 
 #-------------------------------------------------------------------------------------
 #Vistas de Productos
 
-class ProductView(generic.ListView):
-    model = Product
-    template_name = "main/store.html"
-
-    def get_queryset(self):
-        return super().get_queryset().filter(is_active=True)
-
 class ProductDetailView(generic.DetailView):
     model = Product
-    template_name = "main/product-detail.html"
+    template_name = "main/Products/product-detail.html"
     context_object_name = 'product'
 
 class ProductListView(generic.ListView):
@@ -78,7 +71,7 @@ class ProductListView(generic.ListView):
 class ProductEditView (LoginRequiredMixin, UpdateView):
     model = Product
     fields = ['name', 'description', 'details', 'image', 'price', 'category']
-    template_name = 'main/edit-products.html'
+    template_name = 'main/Products/edit-products.html'
     success_message = 'Se edito producto satisfactoriamente!'
     error_message = 'Hubo un error... verifique e intentelo de nuevo.'
 
@@ -94,6 +87,6 @@ class ProductEditView (LoginRequiredMixin, UpdateView):
 
 class ProductDeleteView (LoginRequiredMixin, DeleteView):
     model = Product
-    template_name = 'main/delete-products.html'
+    template_name = 'main/Products/delete-products.html'
     success_url= reverse_lazy('main:categories')
     

@@ -20,7 +20,7 @@ Start Navigation Bar
                     <div class="navCol">
                         <ul>
                         <li><a href="{%url 'main:home'%}">Inicio</a></li>
-                        {% comment %} <li><a href="{% url 'main:categories' %}">Categories</a></li> {% endcomment %}
+                        <li><a href="{% url 'main:categories' %}">Categorias</a></li>
                         {% if request.user.is_authenticated %}
                         <li><a href="{% url 'main:profiles' %}">Perfil</a></li>
                         <li><a href="{% url 'main:logout' %}">Cerrar Sesión</a></li>

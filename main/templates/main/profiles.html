@@ -35,7 +35,7 @@ Start Content
     <div class="innerPageBannerCol">
         <div class="container">
             <div class="bannerContent">
-                <h1 class="mb-3">Profile Section</h1>
+                <h1 class="mb-3">Perfil</h1>
             </div>
         </div>
         {% comment %} SECCION DE PERFIL CON EL NOMBRE {% endcomment %}
@@ -49,40 +49,40 @@ Start Content
                             <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" alt="avatar"
                                 class="rounded-circle img-fluid" style="width: 150px;">
                             <h5 class="my-3"> '{{ user.username }}'</h5>
+                            <p class="text-muted mb-1"> Email: {{ user.email }} </p>
                             <div class="d-flex justify-content-center mb-2">
                             </div>
                         </div>
                     </div>
                 </div>
         {% comment %} SECCION DE PERFIL CON LAS OPCIONES {% endcomment %}
-
-                {% comment %} <div class="col-lg-8">
+                <div class="col-lg-8">
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-9">
-                                <h5 class="my-3">Options</h5>
+                                <h5 class="my-3">Opciones</h5>
                                 <hr>
                             </div>
-                        
                             <div class="row">
                                 <div class="col-md-3"> 
                                     <a href="{%url 'main:add-products'%}"><button type="button" class="btn btn-primary">
-                                        Add Product
+                                        Añadir Producto
                                     </button> </a>
                                 </div>
                                 <div class="col-md-3">
-                                    <a href="{%url 'main:add-categories'%}"><button type="button" class="btn btn-primary">Add Category</button>
+                                    {% if request.user.is_superuser %}
+                                    <a href="{%url 'main:add-categories'%}"><button type="button" class="btn btn-primary">Añadir Categoria</button>
                                     </a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-         {% endcomment %}
         {% comment %} SECCION DE HISTORIAL {% endcomment %}
 
-                    <div class="row">
+                    {% comment %} <div class="row">
                         <div class="col-md-6">
                             <div class="card mb-4 mb-md-0">
                                 <div class="card-body">
@@ -99,7 +99,7 @@ Start Content
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
                 </div>
                 </div>
                 </div>

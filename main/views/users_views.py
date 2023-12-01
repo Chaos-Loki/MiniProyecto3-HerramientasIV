@@ -73,6 +73,5 @@ class ProfileView(LoginRequiredMixin, TemplateView):
             context = super().get_context_data(**kwargs)
             user = self.request.user
             user_profile = UserProfile.objects.get(user=user)
-            context['role'] = user_profile.role
             return context
         

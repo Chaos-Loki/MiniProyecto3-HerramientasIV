@@ -38,14 +38,15 @@ def CategoryCreatePage(request):
             form = CategoryPostForm()
     else:
         form = CategoryPostForm()
-    return render(request, "main/add-categories.html", {'form':form})
+    return render(request, "main/Category/add-categories.html", {'form':form})
 
 #-------------------------------------------------------------------------------------
 #Vistas de Categorias
 
+#Lista de categorias
 class CategoryView(generic.ListView):
     model = Category
-    template_name = "main/categories.html"
+    template_name = "main/Category/ListCategories.html"
     paginate_by = 5
     
     def get_queryset(self):
@@ -53,7 +54,7 @@ class CategoryView(generic.ListView):
 
 class CategoryDetailView(generic.DetailView):
     model = Category
-    template_name = "main/category.html"
+    template_name = "main/Category/category.html"
     context_object_name = 'category'
     paginate_by = 10
 
@@ -62,7 +63,7 @@ class CategoryDetailView(generic.DetailView):
 class CategoryEditView (LoginRequiredMixin, UpdateView):
     model = Category
     fields = ['name', 'description', 'image']
-    template_name = 'main/edit-categories.html'
+    template_name = 'main/Category/edit-categories.html'
     success_message = 'Se edito categoria satisfactoriamente!'
     error_message = 'Hubo un error... verifique e intentelo de nuevo.'
 
@@ -79,5 +80,5 @@ class CategoryEditView (LoginRequiredMixin, UpdateView):
 
 class CategoryDeleteView (LoginRequiredMixin, DeleteView):
     model = Category
-    template_name = 'main/delete-categories.html'
+    template_name = 'main//Category/delete-categories.html'
     success_url= reverse_lazy('main:categories')

@@ -44,7 +44,7 @@ def ReviewCreatePage(request, pk):
         form = ReviewPostForm()
     
     context = {'form': form, 'product': product}
-    return render(request, "main/add-reviews.html", context)
+    return render(request, "main/Reviews/add-reviews.html", context)
 
 #Vistas de Reviews
 
@@ -68,7 +68,7 @@ class ReviewEditView (LoginRequiredMixin, UpdateView):
     model = Review
     context_object_name = 'review'
     form_class = ReviewPostForm
-    template_name = 'main/edit-reviews.html'
+    template_name = 'main/Reviews/edit-reviews.html'
     success_message = 'Se edito tu review satisfactoriamente!'
     error_message = 'Hubo un error... verifique e intentelo de nuevo.'
 
@@ -90,7 +90,7 @@ class ReviewEditView (LoginRequiredMixin, UpdateView):
 class ReviewDeleteView (LoginRequiredMixin, DeleteView):
     model = Review
     context_object_name = 'review'
-    template_name = 'main/delete-reviews.html'
+    template_name = 'main/Reviews/delete-reviews.html'
     success_url= reverse_lazy('main:categories')
     
     def get_context_data(self, **kwargs):
