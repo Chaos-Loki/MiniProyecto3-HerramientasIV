@@ -17,11 +17,6 @@ class UserProfile(models.Model):
     def __str__(self):
         return f'{self.user.first_name} {self.user.last_name}'
 
-
-#class producto, este va a detallar las especificaciones del producto
-#debe usarse tambien en caso de añadir como de mostrar en pantalla
-#debe de tener nombre, descripcion, precio, imagen y categoria
-
 class Category(models.Model):
     class Meta:
         verbose_name_plural = 'Categories'
@@ -50,6 +45,9 @@ class Category(models.Model):
         return Products.objects.filter(categories__title=self.title)
     
 
+#class producto, este va a detallar las especificaciones del producto
+#debe usarse tambien en caso de añadir como de mostrar en pantalla
+#debe de tener nombre, descripcion, precio, imagen y categoria
 class Product(models.Model):
     
     class Meta:

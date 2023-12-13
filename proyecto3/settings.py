@@ -39,7 +39,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "main",
+    "searchfilter",
+    "cart",
+    "chat",
     "ckeditor",
+    "django_filters",
+    "django_extensions",
+    "widget_tweaks",
     "django_cleanup.apps.CleanupConfig",
 ]
 

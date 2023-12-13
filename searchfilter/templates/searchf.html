@@ -1,0 +1,120 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+<!-- ================================
+Start SEO blocks
+================================= -->
+{% block title %}{% endblock %}
+{% block decription %}{% endblock %}
+{% block keywords %}{% endblock %}
+<!-- ================================
+END SEO blocks
+================================= -->
+
+<!-- ================================
+Start CSS blocks
+================================= -->
+{% block extend_header %}{% endblock %}
+<!-- ================================
+END CSS blocks
+================================= -->
+
+<!-- ================================
+Start script blocks
+================================= -->
+{% block extend_footer %}{% endblock %}
+<!-- ================================
+END script blocks
+================================= -->
+
+<!-- ================================
+Start Content
+================================= -->
+{% block content %}
+
+<section>
+    <div style="height: 150px;">
+        <div class="innerPageBannerCol">
+            <div class="container">
+                <div class="bannerContent">
+                    <h1 class="mb-3"></h1>
+                </div>
+                <p></p>
+                <p></p>         
+            </div>
+        </div>
+    </div>
+</section>
+
+<div style="height: auto;">
+    <div class="container-fluid"  style="background-color: #eee;">
+        <form method="GET" action="{% url 'searchfilter:search' %}">
+            {{ form.as_p }}
+            <button type="submit">Filter</button>
+        </form>
+            <p style="height:10px">
+            <ul>
+                {% for product in products %}
+                    <li>{{ product.name }}</li>
+                    <li>{{ product.category }}</li> 
+                    <li>{{ product.user }}</li>
+                    <a href="{% url 'main:product-detail' product.pk %}" >
+                        <button type="button" class="btn btn-primary" style="font-size:15px"> View Details </button>
+                    </a> 
+                {% endfor %}
+            </ul>
+
+        
+
+    </div>
+</div>
+
+
+
+
+<p style="height: 10px;"></p>
+<section>
+    <div class="container">
+        <center>
+                <span class="badge rounded-pill bg-light text-dark"><p style=" margin: auto; font-size: 15px;">Pag. {{ page_obj.number }} de {{page_obj.paginator.num_pages}}</p>
+                </span> 
+            <p style="height: 10px"></p>
+            <nav aria-label="page navigation">
+                <ul style="margin-left:auto; margin-right: auto;"class="pager">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item"><a class="page-link" href="?page=1">&laquo; Primero </a></li>
+                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">anterior</a></li>  
+                        {% endif %}
+                        
+                        {% if page_obj.has_next %}
+                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">siguiente </a></li>
+                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}"> Ultimo&raquo;</a></li> 
+                        {% endif %}
+                </ul>    
+            </nav>
+        </center>
+    </div>
+</section>
+<!-- ============
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ================================
+End Content
+================================= -->
+{%endblock%} 
+    
+
+
