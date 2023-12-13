@@ -1,0 +1,58 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<section>
+    <div style="height: 150px;">
+        <div class="innerPageBannerCol">
+            <div class="container">
+                <div class="bannerContent">
+                    <h1 class="mb-3"></h1>
+                </div>
+                <p></p>
+                <p></p>         
+            </div>
+        </div>
+    </div>
+</section> 
+<section style="height:400px">
+        fff
+    {% if cart_items %}
+    ddd
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total Price</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                    <tr>
+                        <td>{{ item.product }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.product.price }}</td>
+                        <td>{{ item.total_price }}</td>
+                        <td><a href="{% url 'cart:cart_remove' item.id %}">Remove</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3"></td>
+                    <td>Total:</td>
+                    <td>{{ total_price }}</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        {% comment %} <a href="{% url 'checkout' %}" class="btn btn-primary">Checkout</a> {% endcomment %}
+    {% else %}
+        <p>Your shopping cart is empty.</p>
+    {% endif %}
+    </section>
+{% endblock %}

@@ -24,7 +24,7 @@ urlpatterns = [
     #user apps
     path('', include('main.urls', namespace="main")),
     path('', include('searchfilter.urls', namespace="searchfilter")),
-    path('', include('carts.urls', namespace="carts")),
+    path('', include('cart.urls', namespace="cart")),
 ]
 
 if settings.DEBUG:
