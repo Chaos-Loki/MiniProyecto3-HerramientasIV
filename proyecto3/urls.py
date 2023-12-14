@@ -25,6 +25,8 @@ urlpatterns = [
     path('', include('main.urls', namespace="main")),
     path('', include('searchfilter.urls', namespace="searchfilter")),
     path('', include('cart.urls', namespace="cart")),
+    #chat app
+    path('', include('chat.urls', namespace="chat")),
 ]
 
 if settings.DEBUG:

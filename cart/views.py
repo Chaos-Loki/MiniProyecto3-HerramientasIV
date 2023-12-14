@@ -1,12 +1,16 @@
 from django.shortcuts import render
-
+from django.views.decorators.cache import cache_control
+from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from cart.models import Cart
 from main.models import Product
+from django.views.decorators.cache import cache_control
 
-@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url='main:login')
 def add_to_cart(request, pk):
     product = get_object_or_404(Product, pk=pk)
     
@@ -22,8 +26,8 @@ def add_to_cart(request, pk):
     messages.success(request, "Item added to cart")
 
     return redirect("cart:cart_detail")
-
-@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url='main:login')
 def cart_detail(request):
     cart_items = Cart.objects.filter(user=request.user)
     total_price = 0
@@ -39,7 +43,8 @@ def cart_detail(request):
 
     return render(request, "cart_detail.html", context)
 
-@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url='main:login')
 def remove_from_cart(request, cart_item_id):
     cart_item = get_object_or_404(Cart, id=cart_item_id, user=request.user)
 

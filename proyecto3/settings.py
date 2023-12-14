@@ -32,21 +32,28 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    #chat functionality
+    "chat",
+    #basic apps
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    #Daphne - for chat functionality, must be listed before staticfiles
+    "daphne",
     "django.contrib.staticfiles",
+    #other apps
     "main",
     "searchfilter",
     "cart",
-    "chat",
     "ckeditor",
     "django_filters",
     "django_extensions",
     "widget_tweaks",
     "django_cleanup.apps.CleanupConfig",
+    #dependencies of chat - channels - must be at the end
+    "channels"
 ]
 
 MIDDLEWARE = [
@@ -150,4 +157,15 @@ CKEDITOR_CONFIGS = {
         'height': 300,
         'width': 800,
     },
+}
+#Relevant for chat configuration
+
+ASGI_APPLICATION = 'proyecto3.asgi.application'
+
+WSGI_APPLICATION = 'proyecto3.wsgi.application'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
 }
