@@ -80,5 +80,5 @@ class CategoryEditView (LoginRequiredMixin, UpdateView):
 
 class CategoryDeleteView (LoginRequiredMixin, DeleteView):
     model = Category
-    template_name = 'main//Category/delete-categories.html'
+    template_name = 'main/Category/delete-categories.html'
     success_url= reverse_lazy('main:categories')

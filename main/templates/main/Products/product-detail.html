@@ -84,6 +84,14 @@ Start Content
                                                     {{product.details|safe}}
                                                 </div>
                                                 </div>
+                                                {% if product.user != request.user %}
+                                                    <a href="{% url 'other-profile:other-profile' product.user.id %}">
+                                                        <button type="button" class="btn btn-success">
+                                                            contact this author  {{product.user}}
+                                                        </button>
+                                                    </a>
+                                                {% endif%}
+                                        
                                                 <div class="card-header" id="headingPrice">
                                                     <h5 class="mb-0">
                                                         <button class="btn btn-link collapsed" style="text-decoration: none;">

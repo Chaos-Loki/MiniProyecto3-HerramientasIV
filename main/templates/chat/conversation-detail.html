@@ -1,0 +1,27 @@
+<!-- conversation_detail.html -->
+<h1>{{conversation.room_name}}</h1>
+
+<h2>{{conversation.user1.user.username}} - {{conversation.user2.user.username}}</h2>
+
+<div id="messages">
+{% for message in messages %}
+    <p>{{message.from_user.user.username}}: {{message.content}}</p>
+{% endfor %}
+</div>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Send"> 
+</form>
+
+<script>
+setInterval(function(){
+    $.ajax({
+        url: window.location.pathname, 
+        success: function(data) {
+            $('#messages').html(data); 
+        }
+    });
+}, 3000);
+</script>

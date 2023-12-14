@@ -1,0 +1,7 @@
+{% for conversation in conversations %}
+<h1>{{conversation.room_name}}</h1>
+<a href="{% url 'chat:conversation-detail' conversation.id %}">
+    {{ conversation.user1.user.username }} - {{ conversation.user2.user.username }}
+</a>
+<p>Last updated: {{conversation.last_updated}}</p> 
+{% endfor %}

@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('main.urls', namespace="main")),
     path('', include('searchfilter.urls', namespace="searchfilter")),
     path('', include('cart.urls', namespace="cart")),
+    path('', include('other_profile.urls', namespace="other-profile")),
     #chat app
     path('', include('chat.urls', namespace="chat")),
 ]

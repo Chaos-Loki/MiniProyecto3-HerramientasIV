@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+#my own imports
+from django.core.asgi import get_asgi_application
+# from channels.routing import ProtocolTypeRouter, URLRouter
+# from channels.auth import AuthMiddlewareStack
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,8 +44,8 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    #Daphne - for chat functionality, must be listed before staticfiles
-    "daphne",
+    # Daphne must be listed before django.contrib.staticfiles
+    'daphne',
     "django.contrib.staticfiles",
     #other apps
     "main",
@@ -164,8 +168,19 @@ ASGI_APPLICATION = 'proyecto3.asgi.application'
 
 WSGI_APPLICATION = 'proyecto3.wsgi.application'
 
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer"
-    }
-}
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels.layers.InMemoryChannelLayer"
+#     }
+# }
+
+# # application = ProtocolTypeRouter(
+# #     {
+# #         "http": get_asgi_application(),
+# #         "websocket": AuthMiddlewareStack(
+# #             URLRouter(
+# #                 routing.websocket_urlpatterns
+# #             )
+# #         )
+# #     }
+# # )

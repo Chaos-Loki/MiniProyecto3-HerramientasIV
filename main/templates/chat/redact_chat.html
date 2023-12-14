@@ -1,0 +1,17 @@
+<!-- new_conversation.html -->
+
+<h1>Start new conversation with {{ recipient.user }}</h1>
+<label for="sender">Tu usuario: {{request.user}}</label>
+<form method="POST">
+    {% csrf_token %}
+    <input name="room_name" placeholder="Enter chat name">
+    <button type="submit">Create</button>
+</form>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
