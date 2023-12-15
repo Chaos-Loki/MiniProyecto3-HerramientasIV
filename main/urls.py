@@ -22,7 +22,7 @@ urlpatterns = [
     path('profiles/', users_views.ProfileView.as_view(), name="profiles"),
     #Categories
     path('categories/', category_views.CategoryView.as_view(), name="categories"),
-    path('category/<int:pk>', category_views.CategoryDetailView.as_view(), name="category"),
+    path('category/<int:category_id>', products_views.ProductListView.as_view(), name="category"),
     path('add-categories/', category_views.CategoryCreatePage, name="add-categories"),
     path('edit-categories/<int:pk>', category_views.CategoryEditView.as_view(), name="edit-categories"),
     path('delete-categories/<int:pk>', category_views.CategoryDeleteView.as_view(), name="delete-categories"),

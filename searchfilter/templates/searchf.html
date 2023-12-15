@@ -31,84 +31,103 @@ END script blocks
 Start Content
 ================================= -->
 {% block content %}
+<style>
+    /*page specific extra-css*/  
+    
+    body, html {
+        background-color: #F4BF96;
+    }
+    .product-bubble {
+        height: auto;
+        color: #000000;
+        background-color: #F0F0F0;
+        padding: 10px; 
+        margin-bottom: 10px; 
+        border-radius: 8px; 
+        box-shadow: 0 8px 12px rgba(0,0,0,0.15); 
+    }
+</style>
 
 <section>
-    <div style="height: 150px;">
-        <div class="innerPageBannerCol">
-            <div class="container">
-                <div class="bannerContent">
-                    <h1 class="mb-3"></h1>
-                </div>
-                <p></p>
-                <p></p>         
+    <div style="height: auto;">
+        <div style="height: auto;">
+            <img style="display: block; margin-left: auto; margin-right: auto;" src="{% static 'images/BannerBusqueda2.png' %}"  alt="">
+            </p style="height:100px;"></p>
             </div>
         </div>
     </div>
 </section>
 
-<div style="height: auto;">
-    <div class="container-fluid"  style="background-color: #eee;">
-        <form method="GET" action="{% url 'searchfilter:search' %}">
-            {{ form.as_p }}
-            <button type="submit">Filter</button>
-        </form>
-            <p style="height:10px">
-            <ul>
-                {% for product in products %}
-                    <li>{{ product.name }}</li>
-                    <li>{{ product.category }}</li> 
-                    <li>{{ product.user }}</li>
-                    <a href="{% url 'main:product-detail' product.pk %}" >
-                        <button type="button" class="btn btn-primary" style="font-size:15px"> View Details </button>
-                    </a> 
-                {% endfor %}
-            </ul>
-
-        
-
-    </div>
-</div>
-
-
-
-
-<p style="height: 10px;"></p>
 <section>
-    <div class="container">
-        <center>
-                <span class="badge rounded-pill bg-light text-dark"><p style=" margin: auto; font-size: 15px;">Pag. {{ page_obj.number }} de {{page_obj.paginator.num_pages}}</p>
-                </span> 
-            <p style="height: 10px"></p>
-            <nav aria-label="page navigation">
-                <ul style="margin-left:auto; margin-right: auto;"class="pager">
-                        {% if page_obj.has_previous %}
-                            <li class="page-item"><a class="page-link" href="?page=1">&laquo; Primero </a></li>
-                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">anterior</a></li>  
-                        {% endif %}
-                        
-                        {% if page_obj.has_next %}
-                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">siguiente </a></li>
-                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}"> Ultimo&raquo;</a></li> 
-                        {% endif %}
-                </ul>    
-            </nav>
-        </center>
+    {% comment %} SIDEBAR OF SEARCH PARAMETERS {% endcomment %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="container-fluid"  style="box-shadow: 0 8px 12px rgba(0,0,0,0.15);                 border-radius: 30px 20px; background-color: #FCF5ED;">
+                    <p style="height: 10px;">
+                    <h4>Filtros de Búsqueda</h4>
+                    <p style="height: 10px;">
+                    <form method="GET" action="{% url 'searchfilter:search' %}">
+                        {{ form.as_p }}
+                        <button class="btn btnPrimary" style="display: block; margin: 0 auto; font-size:15px" type="submit">Filtrar</button>
+                    </form>
+                    <p style="height:10px">
+                </div>
+            </div>
+    {% comment %} SEARCH RESULTS {% endcomment %}
+            <div class="col-md-8">
+                <h1 class="lgTitle">Resultados</h1>
+                </p>
+                <hr style="border: none;
+                height: 5px;
+                background: #1F1717;"/>
+                <div class="container-fluid">
+                    {% if products %}
+                            {% for product in products %}
+                            <div class="product-bubble">
+                                <ul>
+                                    <li><h4>{{ product.name }}</h4></li>
+                                    <li>Categoria: {{ product.category }}</li> 
+                                    <li>Vendedor: {{ product.user }}</li>
+                                    <li>Precio:$ {{ product.price }}</li>
+                                    
+                                    <a href="{% url 'main:product-detail' product.pk %}" >
+                                        <button type="button" class="btn btnPrimary" style="font-size:15px"> Ver detalles </button>
+                                    </a> 
+                                </ul>
+                            </div>
+                            <p style="height:3px">    
+                            {% endfor %}
+                    {% else %}
+                        <p>No se ha encontrado productos...</p>
+                    {% endif %}
+                </div>
+                <p style="height:10px">
+                    <div class="container">
+                        <center>
+                                <span class="badge rounded-pill bg-light text-dark"><p style=" margin: auto; font-size: 15px;">Pág. {{ page_obj.number }} de {{page_obj.paginator.num_pages}}</p>
+                                </span> 
+                            <p style="height: 10px"></p>
+                            <nav aria-label="page navigation">
+                                <ul style="margin-left:auto; margin-right: auto;"class="pager">
+                                        {% if page_obj.has_previous %}
+                                            <li class="page-item"><a class="page-link" href="?page=1">&laquo; Primero </a></li>
+                                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>  
+                                        {% endif %}
+                                        
+                                        {% if page_obj.has_next %}
+                                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Siguiente </a></li>
+                                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}"> Ultimo&raquo;</a></li> 
+                                        {% endif %}
+                                </ul>    
+                            </nav>
+                        </center>
+                    </div>
+
+            </div>
+        </div>
     </div>
 </section>
-<!-- ============
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <!-- ================================

@@ -51,20 +51,45 @@ class ProductDetailView(generic.DetailView):
     context_object_name = 'product'
 
 class ProductListView(generic.ListView):
-    model = Product
-    template_name = "product.html"
+    model = Category
+    template_name = "main/Category/category.html"
     context_object_name = 'products'
+    paginate_by = 5
     
+
     def get_queryset(self):
-        category_slug = self.kwargs['category_slug']
-        category = Category.objects.get(slug=category_slug)
-        return Product.objects.filter(category=category)
+        category_id = self.kwargs['category_id']
+        self.category = Category.objects.get(id=category_id)
+        products = Product.objects.filter(category_id=category_id)
+        
+        return products
+        # # Paginate the queryset
+        # paginator = Paginator(products, self.paginate_by)  
+        # page_number = self.request.GET.get('page')
+        # page_obj = paginator.get_page(page_number)
+        
+        # return page_obj
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        category_slug = self.kwargs['category_slug']
-        context['category'] = Category.objects.get(slug=category_slug)
+        context['category'] = self.category
+        
+        products = self.get_queryset()
+        
+        paginator = Paginator(products, self.paginate_by)  
+        page_number = self.request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        
+        context['page_obj'] = page_obj
         return context
+        
+        # context = super().get_context_data(**kwargs)
+        # context['category'] = self.category
+        # page_obj = self.get_queryset()
+        
+        # context['page_obj'] = page_obj
+        # return context
+
     
 #----Vista de Edicion de Producto
 

@@ -23,7 +23,7 @@ def add_to_cart(request, pk):
         cart_item.quantity += 1
         cart_item.save()
 
-    messages.success(request, "Item added to cart")
+    messages.success(request, "¡Se añadio un item al carrito!")
 
     return redirect("cart:cart_detail")
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
@@ -52,9 +52,9 @@ def remove_from_cart(request, cart_item_id):
         if cart_item.quantity > 1: 
             cart_item.quantity -= 1
             cart_item.save()
-            messages.success(request, "Reduced item quantity")
+            messages.success(request, "Se redujo la cantidad de items en el carrito")
         else: 
             cart_item.delete()
-            messages.success(request, "Item removed from cart")
+            messages.success(request, "¡Item eliminado del carrito!")
             
     return redirect("cart:cart_detail")

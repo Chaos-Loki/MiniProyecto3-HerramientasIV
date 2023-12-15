@@ -2,8 +2,8 @@
 /* font-family: 'Courier Prime', monospace;
 font-family: 'Heebo', sans-serif; */
 :root {
-  --primaryColor: #F4BF96;
-  --primaryDarkColor: #dba073;
+  --primaryColor: #CE5A67;
+  --primaryDarkColor: #7A2D36;
   --primaryHoverColor: #F4BF96;
   --secondaryColor: #CE5A67;
   --baseColor: #1F1717;
@@ -97,7 +97,6 @@ a, .btn {
 .lgTitle {
   font-size: 30px;
   line-height: normal;
-  font-weight: var(--bold);
   font-family: var(--titleFont)
 }
 .mdTitle {
@@ -135,32 +134,27 @@ a, .btn {
 
 
 .headerCol {
-  background-color: var(--bs-white);
-	padding: 18px 0;
-	-webkit-transition: all 300ms ease-in-out 0s;
-	-o-transition: all 300ms ease-in-out 0s;
-	transition: all 300ms ease-in-out 0s;
-	position: fixed;
+  background-color: #fcfcfc;
+  background-size: cover;
+  padding: 10px 0;
+  position: relative;
   z-index: 99;
-	left: 0;
-	right: 0;
-	top: 0;
-}
-.fixedHeader .headerCol {
-	padding: 10px 0;
-	-webkit-box-shadow: 0 0 24px rgba(0,0,0,0.1);
-  box-shadow: 0 0 24px rgba(0,0,0,0.1);
+  left: 0;
+  right: 0;
+  top: 0;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 0 8px rgba(0,0,0,0.1);
 }
 
 
 /* navigation */
 .navCol {
   font-family: var(--navFont);
-	text-align: right;
+  text-align: right;
 }
 .navCol a {
-	font-size: 23px;
-	color: #000;
+  font-size: 25px;
+  color: #000;
   font-weight: var(--medium);
   display: inline-block;
   position: relative;
@@ -207,17 +201,17 @@ a, .btn {
 
 /* nav toggle */
 .navToggle {
-	display: block;
-	padding: 15px 12px;
-	width: 18px;
-	height: 2px;
-	box-sizing: content-box;
-	background-clip: content-box;
-	-webkit-transition: background-color 500ms ease-in-out 250ms;
+  display: block;
+  padding: 15px 12px;
+  width: 18px;
+  height: 2px;
+  box-sizing: content-box;
+  background-clip: content-box;
+  -webkit-transition: background-color 500ms ease-in-out 250ms;
   -o-transition: background-color 500ms ease-in-out 250ms;
   transition: background-color 500ms ease-in-out 250ms;
-	background-color: #000;
-	border: 1px solid rgba(0,0,0,0.2);
+  background-color: #000;
+  border: 3px solid rgba(0,0,0,0.2);
   margin-left: auto;
 }
 .navToggle:hover {

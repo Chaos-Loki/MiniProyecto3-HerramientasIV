@@ -32,90 +32,162 @@ Start Content
 ================================= -->
 {% comment %} TITUTLO {% endcomment %}
 {% block content %}
+<style>
+    /*page specific extra-css*/  
+    
+    body, html {
+        background-color: #C0885E;
+    }
+    .row-special{
+        height: auto;
+        color: #000000;
+        background-color: #F0F0F0;
+        padding: 10px; 
+        margin-bottom: 10px; 
+        border-radius: 8px; 
+        box-shadow: 0 8px 12px rgba(0,0,0,0.15); 
+    }
+    .container img {
+        max-width: 100%; /* Ensure images don't exceed the container width */
+        height: auto; /* Maintain the image's aspect ratio */
+    }
+    .description-container {
+        max-height: 200px; /* Set a maximum height for the description */
+        overflow: hidden; /* Hide overflowing content */
+    }
+    
+    .description-container p {
+        margin-bottom: 0; /* Remove default bottom margin for paragraphs */
+    }
+
+    .flex-box-2{
+        display:flex;
+        justify-content:flex-end;
+    }
+
+</style>
+
+
     <section>
-        <div style="height: 330px;">
-            <div class="innerPageBannerCol">
-                <div class="container">
-                    <div class="bannerContent">
-                        <h1 class="mb-3"> {{ category.name }}</h1>
-                    </div>
-                    <p></p>
-                    <hr>
-                    <p>{{category.description}}</p>
-                    <a href="{%url 'main:categories'%}">
-                        <button class="btn mb-3 mr-3 btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8l-4 4 4 4M16 12H9"/></svg>
-                            <span>
-                                Go Back
-                            </span>
-                        </button>
-                    </a>            
-                    <p></p>
+        <div class="innerPageBannerCol" style="position: relative; background: url({{category.image.url}}); color: #FFFFFF;background-size:cover; height: 50vh; filter: brightness(30%);">
+        </div>
+            <div style="background: #F0F0F0;   text-align: center;">
+                <p style="height: 4px;">
+                <div class="bannerContent">
+                    <h1 class="mb-3"> {{ category.name }}</h1>
+                    <hr style="border: none;
+                    height: 4px;
+                    background: black;">
+                            <div class="description-container">
+                                <p>{{category.description}}</p>
+                                </a>            
+                                <p></p>
+                            </div>        
                 </div>
+                <p style="height: 15px;">
+            </div>
+        </div>
+            <p style="height: 10px;">
+        <div class="container">
+            <div>
+                <a href="{%url 'main:categories'%}">
+                <button class="btn mb-3 mr-3 btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8l-4 4 4 4M16 12H9"/></svg>
+                    <span>
+                        Volver
+                    </span>
+                </button>
+                </a>
             </div>
         </div>
     </section>
-    <p style="height: 100px;"></p>
+    <p style="height: 20px;"></p>
 
-    <section>
-        <div class="container" style="height: auto">
-            <div class="bannerContent">
-                <h3 class="mb-3"> Available Products </h3>
+<section>
+<div class="container-xl">
+    <div class="bannerContent">
+            <h3 class="mb-3" style="color: #FFFFFF"> Productos Disponibles </h3>
+    </div>
+    {% for product in page_obj %}
+        <div class="row row-special">
+            <div class="row">
+                <div class="col-md-4" >
+                    <div class="container">
+                        <img src="{{product.image.url}}" alt="img-thumbnail" class="img-thumbnail">
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <h2>{{product.name|safe}}
+                    </h2>
+                    <hr style="border: none;
+                    height: 4px;
+                    background: black;">
+                    <div class="description-container">
+                        </p style="height:3px">
+                        {{product.description|safe}}
+                    </div>
+                </div>
             </div>
-            {% for product in category.product_set.all %}
-            <div class="row" style="background-color: #eee;">
-                    <div class="col-md-4">
+            <div class="row">
+                <p style="height: 10px;"></p>
+                <div class="flex-box-2"> 
+                    {% if request.user.is_authenticated and product.user == request.user %}
                         <p></p>
-                        <div class="container-sm">
-                            <div class="pCol">
-                                <img src="{{product.image.url}}" alt="..." class="pImg">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <p></p>
-                        <div class="container-sm">
-                            <div class="pCol">
-                                <h4 class="mb-3">{{product.name|safe}}
-                                </h4>
-                                <p class="text-muted" >Price: <span class="text-muted" style="font-weight: bold;">$ {{product.price|safe}}</span></p>
-                                {{product.description|safe}}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2"  style="font-size:5px">
-                            <p style="height: 10px;"></p> 
-                            {% if request.user.is_authenticated and product.user == request.user %}
-                            <p></p>
-                            <a href="{% url 'main:edit-products' product.pk %}">
-                            <button type="button" class="btn btn-success">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
-                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
-                                </svg>  
-                            </button>
-                            </a>
-                            <a href="{% url 'main:delete-products' product.pk %}">
+                        <a href="{% url 'main:edit-products' product.pk %}">
+                        <button type="button" class="btn btn-success">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
+                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
+                            </svg>  
+                        </button>
+                        </a>
+                        <a href="{% url 'main:delete-products' product.pk %}">
                             <button type="button" class="btn btn-outline-danger">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"></path>
-                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"></path>
-                                </svg>
-                            </button>
-                            </a>
-                            {% endif %}
-                            <p style="height: 10px;"></p>
-                            <a href="{% url 'main:product-detail' product.pk %}" >
-                                <button type="button" class="btn btn-primary" style="font-size:15px"> View Details </button>
-                            </a>
-                    <p></p>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"></path>
+                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"></path>
+                            </svg>
+                        </button>
+                        </a>
+                    {% endif %}
+                </div>
             </div>
+            <div class="row">
+                <p style="height: 10px;"></p>
+                <div class="flex-box-2"> 
+                    <a href="{% url 'main:product-detail' product.pk %}" >
+                        <button type="button" class="btn btnPrimary" style="font-size:15px"> Ver Detalles </button>
+                    </a>
+                </div>
+            </div>
+            <p style="height: 5px;"></p>
         </div>
-        <p></p>
-
-        {% endfor %}
-</section> 
+    {% endfor %}
+</section>
 
 
+<p style="height: 10px;"></p>
+<section>
+    <div class="container">
+        <center>
+                <span class="badge rounded-pill bg-light text-dark"><p style=" margin: auto; font-size: 15px;">Pag. {{ page_obj.number }} de {{page_obj.paginator.num_pages}}</p>
+                </span> 
+            <p style="height: 10px"></p>
+            <nav aria-label="page navigation">
+                <ul style="margin-left:auto; margin-right: auto;"class="pager">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item"><a class="page-link" href="?page=1">&laquo; Primero </a></li>
+                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">anterior</a></li>  
+                        {% endif %}
+                        
+                        {% if page_obj.has_next %}
+                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">siguiente </a></li>
+                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}"> Ultimo&raquo;</a></li> 
+                        {% endif %}
+                </ul>    
+            </nav>
+        </center>
+    </div>
+</section>
 <!-- ================================
 End Content
 ================================= -->

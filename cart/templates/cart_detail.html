@@ -1,20 +1,32 @@
 {% extends 'main/base.html' %}
 {% load static %}
 
+<!-- ================================
+Start CSS blocks
+================================= -->
+{% block extend_header %}{% endblock %}
+<!-- ================================
+END CSS blocks
+================================= -->
+
+<!-- ================================
+Start script blocks
+================================= -->
+{% block extend_footer %}{% endblock %}
+<!-- ================================
+END script blocks
+================================= -->
+
+<!-- ================================
+Start Content
+================================= -->
 
 {% block content %}
 <section>
-    <div style="height: 150px;">
-        <div class="innerPageBannerCol">
-            <div class="container">
-                <div class="bannerContent">
-                    <h1 class="mb-3"></h1>
-                </div>
-                <p></p>
-                <p></p>         
-            </div>
+    <div class="container-fluid">
+        <div class="row">
+            <h1 class="lgTitle">Carrito de Compras de {{request.user}}</h1>
         </div>
-    </div>
 </section> 
 <section style="height:400px">
     <div class="row">
@@ -33,14 +45,14 @@
     </div>
 
     {% if cart_items %}
-    ddd
+    
         <table class="table">
             <thead>
                 <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Total Price</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Precio Total</th>
                     <th></th>
                 </tr>
             </thead>
@@ -51,7 +63,7 @@
                         <td>{{ item.quantity }}</td>
                         <td>{{ item.product.price }}</td>
                         <td>{{ item.total_price }}</td>
-                        <td><a href="{% url 'cart:cart_remove' item.id %}">Remove</a></td>
+                        <td><a href="{% url 'cart:cart_remove' item.id %}">Eliminar</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -66,7 +78,7 @@
 
         {% comment %} <a href="{% url 'checkout' %}" class="btn btn-primary">Checkout</a> {% endcomment %}
     {% else %}
-        <p>Your shopping cart is empty.</p>
+        <p>Tu carrito de compras esta vacio.</p>
     {% endif %}
     </section>
 {% endblock %}

@@ -47,7 +47,7 @@ def CategoryCreatePage(request):
 class CategoryView(generic.ListView):
     model = Category
     template_name = "main/Category/ListCategories.html"
-    paginate_by = 5
+    paginate_by = 4
     
     def get_queryset(self):
         return super().get_queryset().filter(is_active=True)
@@ -56,7 +56,7 @@ class CategoryDetailView(generic.DetailView):
     model = Category
     template_name = "main/Category/category.html"
     context_object_name = 'category'
-    paginate_by = 10
+    #paginate_by = 10
 
 #----Vista de Edicion de Categorias
 
