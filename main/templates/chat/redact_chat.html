@@ -1,17 +1,96 @@
-<!-- new_conversation.html -->
+{% extends 'main/base.html' %}
+{% load static %}
 
-<h1>Start new conversation with {{ recipient.user }}</h1>
-<label for="sender">Tu usuario: {{request.user}}</label>
-<form method="POST">
-    {% csrf_token %}
-    <input name="room_name" placeholder="Enter chat name">
-    <button type="submit">Create</button>
-</form>
+<!-- ================================
+Start SEO blocks
+================================= -->
+{% block title %}{% endblock %}
+{% block decription %}{% endblock %}
+{% block keywords %}{% endblock %}
+<!-- ================================
+END SEO blocks
+================================= -->
 
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
+<!-- ================================
+Start CSS blocks
+================================= -->
+{% block extend_header %}{% endblock %}
+<!-- ================================
+END CSS blocks
+================================= -->
+
+<!-- ================================
+Start script blocks
+================================= -->
+{% block extend_footer %}{% endblock %}
+<!-- ================================
+END script blocks
+================================= -->
+
+<!-- ================================
+Start Content
+================================= -->
+{% block content %}
+<style>
+    /*page specific extra-css*/  
+    
+    body, html {
+        background-color: rgb(255 248 242);
+    }
+    .row-special{
+        height: auto;
+        color: #000000;
+        background-color: #F0F0F0;
+        padding: 10px; 
+        margin-bottom: 10px; 
+        border-radius: 8px; 
+        box-shadow: 0 8px 12px rgba(0,0,0,0.15); 
+    }
+
+    .flex-box-2{
+        display:flex;
+        justify-content:flex-end;
+    }
+
+</style>
+
+<section>
+    <p style="height:10px">
+    <div class="container-xl">
+        <div class="row row-special">
+            <div class="container">
+                <h1> Crea una nueva conversacion con: {{ recipient.user }}</h1>
+
+                <hr style="border: none;
+                height: 5px;
+                background: #CE5A67;" />
+                <label for="sender">Tu usuario: {{request.user}}</label>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input name="room_name" placeholder="Nombre del chat">
+                        <button type="submit" class="btn btnPrimary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+                            </svg>
+                            Crear</button>
+                    </form>
+                    <p style="height:4px">
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+{% endblock %}
+<!-- ================================
+End Content
+================================= -->

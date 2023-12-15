@@ -1,7 +1,84 @@
-{% for conversation in conversations %}
-<h1>{{conversation.room_name}}</h1>
-<a href="{% url 'chat:conversation-detail' conversation.id %}">
-    {{ conversation.user1.user.username }} - {{ conversation.user2.user.username }}
-</a>
-<p>Last updated: {{conversation.last_updated}}</p> 
-{% endfor %}
+{% extends 'main/base.html' %}
+{% load static %}
+
+<!-- ================================
+Start CSS blocks
+================================= -->
+{% block extend_header %}{% endblock %}
+<!-- ================================
+END CSS blocks
+================================= -->
+
+<!-- ================================
+Start script blocks
+================================= -->
+{% block extend_footer %}{% endblock %}
+<!-- ================================
+END script blocks
+================================= -->
+
+<!-- ================================
+Start Content
+================================= -->
+{% block content %}
+<style>
+    /*page specific extra-css*/  
+    
+    body, html {
+        background-color: rgb(235 235 235);
+    }
+    .row-special{
+        height: auto;
+        color: #000000;
+        background-color: #F0F0F0;
+        padding: 10px; 
+        margin-bottom: 10px; 
+        border-radius: 8px; 
+        box-shadow: 0 8px 12px rgba(0,0,0,0.15); 
+    }
+
+    .flex-box-2{
+        display:flex;
+        justify-content:flex-end;
+    }
+
+
+    
+</style>
+<p style="height:10px;">
+    <section>
+        <div class="container-xl">
+                {% for conversation in conversations %}
+                <div class="row row-special">
+                    <h1>Nombre de la Sala: {{conversation.room_name}}</h1>
+                    <hr style="border: none;
+                        height: 4px;
+                        background: black;">
+                        <span class="text-muted">
+                        Participantes: {{ conversation.user1.user.username }} - {{ conversation.user2.user.username }}
+                    </span>
+                    <p>Ultima actualización: {{conversation.last_updated}}</p>
+                    <div class="flex-box-2"> 
+                        <a href="{% url 'chat:conversation-detail' conversation.id %}">
+                            <button type="button" class="btn btnPrimary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"/>
+                                    <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                                </svg>
+                                Acceder
+                            </button>
+                        </a>
+                    </div>
+                    <p style="height:10px"> 
+                </div>
+                {% endfor %}
+        </div>
+    </section>
+
+
+
+<!-- ================================
+End Content
+================================= -->
+{%endblock%} 
+    

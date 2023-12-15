@@ -1,19 +1,101 @@
-<!-- conversation_detail.html -->
-<h1>{{conversation.room_name}}</h1>
+{% extends 'main/base.html' %}
+{% load static %}
 
-<h2>{{conversation.user1.user.username}} - {{conversation.user2.user.username}}</h2>
+<!-- ================================
+Start CSS blocks
+================================= -->
+{% block extend_header %}{% endblock %}
+<!-- ================================
+END CSS blocks
+================================= -->
 
-<div id="messages">
-{% for message in messages %}
-    <p>{{message.from_user.user.username}}: {{message.content}}</p>
-{% endfor %}
-</div>
+<!-- ================================
+Start script blocks
+================================= -->
+{% block extend_footer %}{% endblock %}
+<!-- ================================
+END script blocks
+================================= -->
 
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p  }}
-    <input type="submit" value="Send"> 
-</form>
+<!-- ================================
+Start Content
+================================= -->
+{% block content %}
+<style>
+    /*page specific extra-css*/  
+    
+    body, html {
+        background-color: rgb(204 204 204);
+    }
+    .row-special{
+        height: auto;
+        color: #000000;
+        background-color: #F0F0F0;
+        padding: 10px; 
+        margin-bottom: 10px; 
+        border-radius: 8px; 
+        box-shadow: 0 8px 12px rgba(0,0,0,0.15); 
+    }
+
+    .flex-box-2{
+        display:flex;
+        justify-content:flex-end;
+    }
+
+    #messages .user1 {
+        background-color: rgb(69 224 188);
+        padding: 5px; 
+        margin-bottom: 10px; 
+        border-radius: 8px; 
+        box-shadow: 0 8px 12px rgba(0,0,0,0.15); 
+    }   
+    
+    #messages .user2 {
+        background-color: #58B8F4; 
+        padding: 5px; 
+        margin-bottom: 10px; 
+        border-radius: 8px; 
+        box-shadow: 0 8px 12px rgba(0,0,0,0.15); 
+    }
+    
+</style>
+<p style="height:10px;">
+    <section>
+
+        <div class="container-xl">
+            <div class="row row-special">
+                <div class="container" style="text-align: center;">
+                    <h1>Nombre de la Sala: {{conversation.room_name}}</h1>
+                    <hr style="border: none;
+                    height: 5px;
+                    background: #451017;" />
+                    <span class="text-muted">
+                        <h6>{{conversation.user1.user.username}} - {{conversation.user2.user.username}}</h6>
+                    </span>
+                    <a href="{% url 'chat:inbox' %}">
+                        <button class="btn mb-3 mr-2 btn-danger" style="font-size: 12px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8l-4 4 4 4M16 12H9"/></svg>Volver </button>
+                    </a> 
+                </div>
+                <div id="messages">
+                    {% for message in messages %}
+                        <p class="{% if message.from_user == conversation.user1 %}user1{% else %}user2{% endif %}">
+                            {{message.from_user.user.username}}: {{message.content}}</p>
+                        </p>
+                    {% endfor %}
+                </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p  }}
+                    <div class="flex-box-2">
+                        <div style="width: 10px;"></div> <!-- Empty div with margin -->
+                        <input type="submit" style="font-size:16px;" class="btn btn-success ml-2" value="Enviar"> 
+                    </div>
+                </form>                                        
+            </div>
+        </div>
+    </section>
+
+
 
 <script>
     var socket = new WebSocket('ws://' + window.location.host + '/ws/conversation/{{ conversation.id }}/');
@@ -32,3 +114,8 @@
         $('#id_content').val('');
     });
 </script>
+<!-- ================================
+End Content
+================================= -->
+{%endblock%} 
+    

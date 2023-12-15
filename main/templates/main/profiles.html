@@ -31,83 +31,64 @@ END script blocks
 Start Content
 ================================= -->
 {% block content %}
-<section>
-    <div class="innerPageBannerCol">
-        <div class="container">
-            <div class="bannerContent">
-                <h1 class="mb-3">Perfil</h1>
+<style>
+    /*page specific extra-css*/  
+    
+    body, html {
+        background-size: cover;
+        background-size:contain;
+        background-color: rgb(255 206 169);
+    }
+    .row-special{
+        height: auto;
+        color: #000000;
+        background-color: #F0F0F0;
+        padding: 10px; 
+        margin-bottom: 10px; 
+        border-radius: 8px; 
+        box-shadow: 0 8px 12px rgba(0,0,0,0.15); 
+    }
+
+    .flex-box-2{
+        display:flex;
+        justify-content:flex-end;
+    }
+
+</style>
+<p style="height:10px;">
+    <section>
+        <div class="container-xl">
+            <div class="row row-special">
+                <div class="col-md-4" >
+                    <div class="container" style="text-align: center;">
+                        <h1 class="mb-3 ">Perfil</h1>
+                        <hr style="border: none;
+                        height: 5px;
+                        background: #CE5A67;" />
+                        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" alt="avatar"
+                                    class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3"> '{{ user.username }}'</h5>
+                        <p class="text-muted mb-1"> Email: {{ user.email }} </p>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <h5 class="my-3">Opciones</h5>
+                    <hr style="border: none;
+                        height: 5px;
+                        background: #451017;" />
+                            <a href="{%url 'main:add-products'%}"><button style="font-size:15px;" type="button" class="btn btnPrimary">
+                                Añadir Producto
+                            </button> </a>
+                            <a href="{%url 'chat:inbox'%}"><button style="font-size:15px;" type="button" class="btn btnPrimary">Revisar Inbox</button>
+                            </a>
+                            {% if request.user.is_superuser %}
+                            <a href="{%url 'main:add-categories'%}"><button style="font-size:15px;" type="button" class="btn btnPrimary">Añadir Categoria</button>
+                            </a>
+                            {% endif %}
+                </div>
             </div>
         </div>
-        {% comment %} SECCION DE PERFIL CON EL NOMBRE {% endcomment %}
-        <div class="container-fluid">
-            
-            <section style="background-color: #eee;">
-                <div class="row"> 
-                    <div class="col-lg-4">
-                        <div class="card mb-4">
-                            <div class="card-body text-center">
-                            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" alt="avatar"
-                                class="rounded-circle img-fluid" style="width: 150px;">
-                            <h5 class="my-3"> '{{ user.username }}'</h5>
-                            <p class="text-muted mb-1"> Email: {{ user.email }} </p>
-                            <div class="d-flex justify-content-center mb-2">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        {% comment %} SECCION DE PERFIL CON LAS OPCIONES {% endcomment %}
-                <div class="col-lg-8">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-9">
-                                <h5 class="my-3">Opciones</h5>
-                                <hr>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3"> 
-                                    <a href="{%url 'main:add-products'%}"><button type="button" class="btn btn-primary">
-                                        Añadir Producto
-                                    </button> </a>
-                                </div>
-                                <div class="col-md-3">
-                                    {% if request.user.is_superuser %}
-                                    <a href="{%url 'main:add-categories'%}"><button type="button" class="btn btn-primary">Añadir Categoria</button>
-                                    </a>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        {% comment %} SECCION DE HISTORIAL {% endcomment %}
-
-                    {% comment %} <div class="row">
-                        <div class="col-md-6">
-                            <div class="card mb-4 mb-md-0">
-                                <div class="card-body">
-                                    <p class="mb-4"><span class="text-primary font-italic me-1">Historial de Reviews</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card mb-4 mb-md-0">
-                                <div class="card-body">
-                                    <p class="mb-4"><span class="text-primary font-italic me-1">Historial de productos publicados</span>
-                                </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div> {% endcomment %}
-                </div>
-                </div>
-                </div>
-                </div>
-            </section>
-        </div>
-    </div>
-</section>
+    </section>
 
 {% endblock %}
 <!-- ================================
