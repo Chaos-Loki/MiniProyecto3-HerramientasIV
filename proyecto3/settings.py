@@ -164,15 +164,15 @@ CKEDITOR_CONFIGS = {
 }
 #Relevant for chat configuration
 
-ASGI_APPLICATION = 'proyecto3.asgi.application'
+ASGI_APPLICATION = 'chat.routing.application'
 
 WSGI_APPLICATION = 'proyecto3.wsgi.application'
 
-# CHANNEL_LAYERS = {
-#     "default": {
-#         "BACKEND": "channels.layers.InMemoryChannelLayer"
-#     }
-# }
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 # # application = ProtocolTypeRouter(
 # #     {

@@ -11,17 +11,24 @@
 
 <form method="POST">
     {% csrf_token %}
-    {{ form }}
+    {{ form.as_p  }}
     <input type="submit" value="Send"> 
 </form>
 
 <script>
-setInterval(function(){
-    $.ajax({
-        url: window.location.pathname, 
-        success: function(data) {
-            $('#messages').html(data); 
-        }
+    var socket = new WebSocket('ws://' + window.location.host + '/ws/conversation/{{ conversation.id }}/');
+    
+    socket.onmessage = function(event) {
+        var data = JSON.parse(event.data);
+        $('#messages').append('<p>' + data.content + '</p>');
+    };
+    
+    $('form').submit(function(event) {
+        event.preventDefault();
+        var message = $('#id_content').val(); 
+        socket.send(JSON.stringify({
+            'content': message
+        }));
+        $('#id_content').val('');
     });
-}, 3000);
 </script>
