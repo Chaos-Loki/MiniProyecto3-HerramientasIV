@@ -26,7 +26,88 @@ Start script blocks
 <!-- ================================
 END script blocks
 ================================= -->
-
 <!-- ================================
 Start Content
 ================================= -->
+{% comment %} TITUTLO {% endcomment %}
+{% block content %}
+<style>
+    /*page specific extra-css*/  
+    
+    body, html {
+        background-color: #A72F24;
+    }
+    .row-special{
+        height: auto;
+        color: #D2D2D2;
+        background-color: #F0F0F0;
+        padding: 10px; 
+        margin-bottom: 10px; 
+        border-radius: 8px; 
+        box-shadow: 0 8px 12px rgba(0,0,0,0.15); 
+    }
+    .container img {
+        max-width: 100%; /* Ensure images don't exceed the container width */
+        height: auto; /* Maintain the image's aspect ratio */
+    }
+    .description-container {
+        max-height: 200px; /* Set a maximum height for the description */
+        overflow: hidden; /* Hide overflowing content */
+    }
+    
+    .description-container p {
+        margin-bottom: 0; /* Remove default bottom margin for paragraphs */
+    }
+
+    .flex-box-2{
+        display:flex;
+        justify-content:flex-end;
+    }
+    .footerCol{
+        color: white;
+    }
+</style>
+<section>
+    <div class="innerPageBannerCol" style="position: relative; background: url('{% static "images/BannerHome.png" %}');; color: #FFFFFF;background-size:cover; height: 100vh;">
+    </div>
+    </div>
+        <p style="height: 10px;">
+</section>
+<p style="height: 20px;"></p>
+<section>
+    <div>
+        <div>
+            <div class="container" style="height: auto; color: #ffff;">
+                <p style="height:10px;"></p>
+                <div col>
+                    <h1 class="mb-3" style="text-align: center;">Sobre Nosotros</h1>
+                    <div class="row">
+                        <p >
+                            ¡Bienvenidos a Sinfonia Store! Donde la música cobra vida en cada formato, desde los nostálgicos vinilos hasta las últimas creaciones digitales. Somos más que una tienda; somos el rincón perfecto para coleccionistas, amantes del formato físico y apasionados por la diversidad musical.
+                        </p>
+                        <p>
+                            En Sinfonia Store, nos embarcamos en un viaje sonoro que abraza la riqueza de la música en todas sus formas. Explora nuestro variado catálogo, donde cada vinilo, CD y formato digital cuenta una historia única. Desde las melodías atemporales hasta las últimas tendencias, tenemos algo para cada melómano.
+                        </p>
+                        <p >
+                            Más allá de ser una tienda, somos tus compañeros de viaje musical. Descubre reseñas y análisis que te sumergirán en el arte detrás de cada nota. Mantente actualizado con eventos, lanzamientos exclusivos y noticias que harán latir tu corazón musical.
+                        </p>
+                        <p >
+                            Sinfonia Store es un espacio vibrante donde la música se convierte en una experiencia. No solo encontrarás productos excepcionales, sino también un ambiente donde puedes compartir tu pasión y descubrir nuevos tesoros. Desde vinilos raros hasta las últimas producciones digitales, estamos aquí para enriquecer tu conexión con la música.
+                        </p>
+                        <p >
+                            Únete a nuestra comunidad de melómanos y deja que Sinfonia Store sea tu refugio musical. Prepárate para explorar un mundo donde cada formato es una obra de arte, y cada melodía es una invitación a la eternidad. ¡Bienvenido a Sinfonia Store, donde la música encuentra su hogar!
+                        </p>
+                    </div>
+                    <p style="height:10px;"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================================
+End Content
+================================= -->
+{%endblock%} 
+    
